@@ -70,10 +70,7 @@ class calc_class
         $_expolde_str = explode($this->__point_string,$calc_string);
         $_expolde_str_int = implode('',$_expolde_str);
         $_ret = strlen(end($_expolde_str));
-        return [
-            'int' => $_expolde_str_int,
-            'point_position' => $_ret
-        ];
+        return array('int' => $_expolde_str_int,'point_position' => $_ret );
     }
 
     private function calculator()
