@@ -23,7 +23,7 @@ class calc_class
         $this->__digit = false;
         $this->__point_string = '.';
         $this->__float_list = array();
-        $this->_max_length = strlen(PHP_INT_MAX)-1;
+        $this->_max_length = strlen(PHP_INT_MAX);
     }
 
     public function query($calc_string,$_digit=false, $_point_string='.')
@@ -174,10 +174,9 @@ class calc_class
                     $p = $matches[1] * $matches[3];
                     break;
                 case '/':
-                    $p = $this->divideFloat($matches[1] , $matches[3],$this->__max_point_postion);
+                    $p = (int)($matches[1] / substr($matches[3],-$this->_max_length,strlen($matches[3])-$this->_max_length)) * (int)('1'.str_repeat('0',$this->_max_length-1));
                     break;
             }
-
             if ($this->family_over_int === true)
                 return (string)$p;
             else
@@ -185,12 +184,6 @@ class calc_class
         }
     }
 
-    private function divideFloat($a, $b, $precision) {
-        $a*=pow(10, $precision);
-        $result=(int)($a / $b);
-        if (strlen($result)==$precision) return '0.' . $result;
-        else return preg_replace('/(\d{' . $precision . '})$/', '.\1', $result);
-    }
 
     function insSubstr($str, $sub, $posEnd){
         if($this->family_over_int === false)
@@ -211,9 +204,13 @@ class calc_class
                 return (string)mb_substr($str, 0, $posStart) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
 
             }else{
+
+                var_dump($str);
+
                 $endString = mb_substr($str, -$posEnd,$posEnd);
                 $posStart = strlen($str) - strlen($endString);
                 $_startString = mb_substr($str, 0, $posStart);
+
                 return (($_startString=='-')?$_startString.'0':$_startString) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
             }
 
