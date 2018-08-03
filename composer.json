@@ -2,12 +2,24 @@
     "name": "steven79/calc",
     "description": "float point calculator php",
     "version":"1.0.0",
+    "keywords": ["calc","float point"],
+    "homepage": "https://github.com/choyunsung/calc",
+    "license": "MIT",
     "authors": [
         {
             "name": "choyunsung",
-            "email": "choyunsung79@gmail.com"
+            "email": "choyunsung79@gmail.com",
+            "role":"developer"
         }
     ],
+
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Calc.php"
+        ]
+    }
 }

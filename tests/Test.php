@@ -6,6 +6,6 @@
  * Time: AM 9:59
  */
 
-include 'float_point_calc.php';
-use steven\calc;
-echo calc('2222333332.111111111 + 111.2');
+include '/Volumes/M2HDD/workspaces/myprojects/calc_github/vendor/autoload.php';
+
+echo steven\calc('111111111.1111111111 + 111111111.22',8);

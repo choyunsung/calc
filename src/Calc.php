@@ -4,7 +4,7 @@
  * Date: 2018. 8. 3.
  */
 
-namespace steven\calc;
+namespace steven;
 
 
 class calc_class
@@ -13,18 +13,21 @@ class calc_class
     protected $__digit;
     protected $__point_string;
     protected $__max_point_postion = 0;
-    public $__float_list = [];
+    public $__float_list;
     public $___calc;
 
     function __construct()
     {
-        $this->__digit = 8;
+        $this->__digit = false;
         $this->__point_string = '.';
+        $this->__float_list = array();
     }
 
-    public function query($calc_string,$_digit=deafult, $_point_string='.')
+    public function query($calc_string,$_digit=false, $_point_string='.')
     {
-        $this->__digit = $_digit;
+        if($_digit!==false)
+            $this->__digit = $_digit;
+
         $this->__point_string = $_point_string;
         preg_match('/(.*)(\+|\-|\/|\*)(.*)/i',$calc_string,$calc_string_match);
         if(count($calc_string_match)==0)
@@ -48,7 +51,9 @@ class calc_class
             {
                 $_ret = $this->instcheck($val);
                 if($this->__max_point_postion < $_ret['point_position'])
+                {
                     $this->__max_point_postion = $_ret['point_position'];
+                }
 
                 $this->__float_list[] = $_ret;
             }else{
@@ -78,9 +83,11 @@ class calc_class
             if(@preg_match('/\d+/',$val['int']))
             {
                 if($this->__max_point_postion > $val['point_position'])
+                {
                     $this->___calc[] = $val['int'].str_repeat('0',$this->__max_point_postion - $val['point_position']);
-                else
+                }else{
                     $this->___calc[] = $val['int'];
+                }
             }
             else{
                 $this->___calc[] = $val;
@@ -113,12 +120,12 @@ class calc_class
     function insSubstr($str, $sub, $posEnd){
         $endString = mb_substr($str, -$posEnd,$posEnd);
         $posStart = strlen($str) - strlen($endString);
-        return mb_substr($str, 0, $posStart) . $sub . $endString;
+        return mb_substr($str, 0, $posStart) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
     }
 
 }
 
-function & calc($calc_string,$_digit=deafult , $_point_string='.')
+function & calc($calc_string,$_digit=false , $_point_string='.')
 {
     $_a = new calc_class();
     $_return = $_a->query($calc_string,$_digit, $_point_string);
