@@ -20,9 +20,11 @@ The constructors of the classes are not public, you must use a factory method to
 Example:
 
 ```php
-include 'vender/autoload.php';
-use steven\calc;
+include '/vendor/autoload.php';
 
-echo calc('1111.111 + 1111.111');
+echo "+:    ".steven\calc('111111111111111.10987654321 + 111111.22',8)."<br>";
+echo "/:    ".steven\calc('111111111.1111111111 / 111111111.22',8)."<br>";
+echo "*:    ".steven\calc('111111.1111111111 * 1111111.22',8)."<br>";
+echo "-:    ".steven\calc('111111111.1111111111 - 111111111.22',8)."<br>";
 
 ```
