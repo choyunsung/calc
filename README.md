@@ -8,9 +8,21 @@ Just define the following requirement in your `composer.json` file:
 
 ```json
 {
-    "require": {
-        "steven/calc": "*"
-    }
+	"repositories": [{
+		"type": "package",
+		"package": {
+			"name": "steven79/calc",
+			"version": "1.0.0",
+			"source": {
+				"url": "https://github.com/choyunsung/calc",
+				"type": "git",
+				"reference": "master"
+			}
+		}
+	}],
+	"require": {
+		"steven79/calc": "*"
+	}
 }
 ```
 
