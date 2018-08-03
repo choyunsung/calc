@@ -8,9 +8,21 @@ Just define the following requirement in your `composer.json` file:
 
 ```json
 {
-    "require": {
-        "steven/calc": "*"
-    }
+	"repositories": [{
+		"type": "package",
+		"package": {
+			"name": "steven79/calc",
+			"version": "1.0.0",
+			"source": {
+				"url": "https://github.com/choyunsung/calc",
+				"type": "git",
+				"reference": "master"
+			}
+		}
+	}],
+	"require": {
+		"steven79/calc": "*"
+	}
 }
 ```
 
@@ -20,9 +32,11 @@ The constructors of the classes are not public, you must use a factory method to
 Example:
 
 ```php
-include 'vender/autoload.php';
-use steven\calc;
+include '/vendor/autoload.php';
 
-echo calc('1111.111 + 1111.111');
+echo "+:    ".steven\calc('111111111111111.10987654321 + 111111.22',8);
+echo "/:    ".steven\calc('111111111.1111111111 / 111111111.22',8);
+echo "*:    ".steven\calc('111111.1111111111 * 1111111.22',8);
+echo "-:    ".steven\calc('111111111.1111111111 - 111111111.22',8);
 
 ```
