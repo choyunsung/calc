@@ -1,6 +1,7 @@
 {
     "name": "steven79/calc",
     "description": "float point calculator php",
+    "version":"1.0.0",
     "authors": [
         {
             "name": "choyunsung",
