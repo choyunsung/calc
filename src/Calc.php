@@ -174,14 +174,22 @@ class calc_class
                     $p = $matches[1] * $matches[3];
                     break;
                 case '/':
-                    $p = $matches[1] / $matches[3];
+                    $p = $this->divideFloat($matches[1] , $matches[3],$this->__max_point_postion);
                     break;
             }
+
             if ($this->family_over_int === true)
                 return (string)$p;
             else
                 return $this->insSubstr($p, $this->__point_string, $this->__max_point_postion);
         }
+    }
+
+    private function divideFloat($a, $b, $precision) {
+        $a*=pow(10, $precision);
+        $result=(int)($a / $b);
+        if (strlen($result)==$precision) return '0.' . $result;
+        else return preg_replace('/(\d{' . $precision . '})$/', '.\1', $result);
     }
 
     function insSubstr($str, $sub, $posEnd){
