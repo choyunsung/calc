@@ -7,5 +7,8 @@
  */
 
 include '/Volumes/M2HDD/workspaces/myprojects/calc_github/vendor/autoload.php';
-
-echo steven\calc('111111111.1111111111 + 111111111.22',8);
+echo PHP_INT_MAX."<br><br>";
+echo "+:    ".steven\calc('111111111.1111111111 + 111111111.22',8)."<br>";
+echo "/:    ".steven\calc('111111111.1111111111 / 111111111.22',8)."<br>";
+echo "*:    ".steven\calc('111111111.1111111111 * 111111111.22',8)."<br>";
+echo "-:    ".steven\calc('111111111.1111111111 - 111111111.22',8)."<br>";

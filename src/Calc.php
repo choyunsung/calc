@@ -118,9 +118,17 @@ class calc_class
     }
 
     function insSubstr($str, $sub, $posEnd){
-        $endString = mb_substr($str, -$posEnd,$posEnd);
-        $posStart = strlen($str) - strlen($endString);
-        return mb_substr($str, 0, $posStart) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
+        $str = sprintf("%s",$str);
+        if(strpos($str,'.'))
+        {
+            $_tmp_str = explode('.',$str);
+            return $_tmp_str[0]. $sub. substr(end($_tmp_str),0,$posEnd);
+        }else{
+            $endString = mb_substr($str, -$posEnd,$posEnd);
+            $posStart = strlen($str) - strlen($endString);
+            return mb_substr($str, 0, $posStart) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
+        }
+
     }
 
 }
