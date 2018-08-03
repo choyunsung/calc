@@ -24,8 +24,6 @@ class calc_class
         $this->__point_string = '.';
         $this->__float_list = array();
         $this->_max_length = strlen(PHP_INT_MAX)-1;
-        var_dump($this->_max_length);
-        echo "<br>";
     }
 
     public function query($calc_string,$_digit=false, $_point_string='.')
@@ -169,6 +167,7 @@ class calc_class
                     $p = $matches[1] + $matches[3];
                     break;
                 case '-':
+                    var_dump($this->family_over_int);
                     $p = $matches[1] - $matches[3];
                     break;
                 case '*':
@@ -188,10 +187,12 @@ class calc_class
     function insSubstr($str, $sub, $posEnd){
         if($this->family_over_int === false)
             $str = sprintf("%s",$str);
-        if($this->family_over_int === false && @strpos($sub,'.') )
+
+
+        if($this->family_over_int === false && @strpos($str,'.') )
         {
             $_tmp_str = explode('.',$str);
-            return $_tmp_str[0]. $sub. substr(end($_tmp_str),0,$posEnd);
+            return (($_tmp_str[0]=='-')?$_tmp_str[0].'0':$_tmp_str[0]). $sub. substr(end($_tmp_str),0,$posEnd);
         }else{
             if($this->family_over_int === true)
             {
@@ -199,15 +200,13 @@ class calc_class
                 $str = $str_tmp;
                 $endString = mb_substr($str, -$posEnd,$posEnd);
                 $posStart = strlen($str) - strlen($endString);
-                echo mb_substr($str, 0, $posStart)."<br>";
-                echo $endString."<br>";
-                echo substr($endString,0,$this->__digit)."<br>";
                 return (string)mb_substr($str, 0, $posStart) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
 
             }else{
                 $endString = mb_substr($str, -$posEnd,$posEnd);
                 $posStart = strlen($str) - strlen($endString);
-                return mb_substr($str, 0, $posStart) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
+                $_startString = mb_substr($str, 0, $posStart);
+                return (($_startString=='-')?$_startString.'0':$_startString) . $sub . (($this->__digit!==false)?substr($endString,0,$this->__digit):$endString);
             }
 
         }
