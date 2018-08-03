@@ -1,0 +1,12 @@
+{
+    "name": "steven/calc",
+    "description": "float point calculator php",
+    "authors": [
+        {
+            "name": "choyunsung",
+            "email": "choyunsung79@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
